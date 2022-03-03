@@ -22,12 +22,12 @@
 #undef HEAPDEBUG
 
 #define MQTT_DEBUG
-
+/*
 #define SX1502ADDRESS 0x20
 #define ADS1015ADDRESS 0x49
 #define RELAYADDRESS 0x11
 #define LCDADDRESS 0x3E
-
+*/
 
 // how often to read the Bluetooth Sensors
 //#define BLUETOOTHREADDELAY 900000L
@@ -171,17 +171,17 @@ float SolarPanelVoltage;
 float SolarPanelCurrent;
 
 // state variables
-
+/*
 int valveState[8];
 float valveTime[8];
-
+*/
 String moistureSensorType[4];
 
-
+/*
 #include "SDL_Arduino_SX1502.h"
 
 SDL_Arduino_SX1502 sx1502(SX1502ADDRESS);
-
+*/
 #define MAXBLUETOOTHDEVICES 16
 // Bluetooth Sensors array
 String BluetoothAddresses[MAXBLUETOOTHDEVICES];
@@ -230,9 +230,9 @@ Preferences preferences;
 #include "ArduinoJson-v6.14.1.h"
 
 
-
+/*
 #include "ValveOutputs.h"
-
+*/
 #include <esp_wps.h>
 #include <esp_smartconfig.h>
 
@@ -251,7 +251,7 @@ esp_wps_config_t config = WPS_CONFIG_INIT_DEFAULT(ESP_WPS_MODE);
 
 // Hydroponics
 
-
+/*
 struct HydroponicsData {
   float temperature = -1000.0;
   int rawTDS = -1;
@@ -259,11 +259,11 @@ struct HydroponicsData {
   int rawLevel = -1;
   int rawPh = -1;
 };
-
-HydroponicsData latestHydroponicsData;
+*/
+// HydroponicsData latestHydroponicsData;
 
 // AMG8833 pixels
-
+/*
 #include "Seeed_AMG8833_driver.h"
 
 
@@ -271,7 +271,7 @@ HydroponicsData latestHydroponicsData;
 float AMG8833_temp[PIXEL_NUM] = {0};
 
 AMG8833 amg8833;
-
+*/
 // MQTT
 
 
@@ -359,7 +359,7 @@ void MQTTcallback(char* topic, byte* payload, unsigned int length) {
 
   switch (messagetype)
   {
-
+/*
     case MQTTPUBVALVESET:
       {
 
@@ -397,6 +397,7 @@ void MQTTcallback(char* topic, byte* payload, unsigned int length) {
         xSemaphoreGive( xSemaphoreEvaluatingValves);
         break;
       }
+*/
     default:
 
       Serial.print("unsupported incoming MQTT Message:");
@@ -553,11 +554,11 @@ void MQTTreconnect(bool reboot) {
 
 
 #define min(a,b) ((a)<(b)?(a):(b))
-
+/*
 #include "lcddisplay.h"
 
 #include "OLEDDisplay.h"
-
+*/
 
 
 
@@ -587,6 +588,7 @@ int fetchRSSI()
 
 
 // NeoPixels
+/*
 #include "NeoPixelBus.h"
 
 
@@ -609,10 +611,11 @@ struct MyAnimationState
   RgbwColor StartingColor;
   RgbwColor EndingColor;
 };
-
+*/
 
 
 // GPIO where the DS18B20 is connected to
+/*
 const int oneWireBus = 16;
 
 #include "OneWire.h"
@@ -640,34 +643,37 @@ bool checkForOneWire()
     return true;
   }
 }
-
+*/
 
 // readSensors
-
+/*
 #include "ReadSensors.h"
-
+*/
 // RTOS
 
 #include "RTOSTasks.h"
 
 #include "MQTTFunctions.h"
 
-
+/*
 #include "myPixelRoutines.h"
+*/
 
 #include "aRestFunctions.h"
+
 // state initialization
 
 void initialState()
 {
   int i;
+/*
   for (i = 0; i < 8; i++)
   {
     valveState[i] = 0;  // valve off
     valveTime[i] = 0.0; // valve off
 
   }
-
+*/
   if (HydroponicsMode == 1)
   {
 
@@ -687,9 +693,9 @@ void initialState()
 
 
 }
-
+/*
 #include "I2CScanner.h"
-
+*/
 int countBluetoothSensors()
 {
   int i;
@@ -754,8 +760,9 @@ bool checkForLevelSensor()
 
 void setup()
 {
-
+/*
   Wire.begin();
+*/
   int i;
 
   for (i = 0; i < MAXBLUETOOTHDEVICES; i++)
@@ -768,8 +775,9 @@ void setup()
 
   // Start Serial
   Serial.begin(115200);
-
+/*
   startupSetupGPIOBits();
+*/
   Serial.println();
   Serial.println("##############################");
   Serial.println("SmartGarden3 Wireless Extender");
@@ -784,10 +792,10 @@ void setup()
 
 
   pinMode(15, INPUT);
-
+/*
   ads1015.begin();
-
-
+*/
+/*
   if (checkForI2CAddress(0x11))
   {
     Serial.println("Relay Present - 0x11");
@@ -795,7 +803,8 @@ void setup()
   }
   else
     Serial.println("Relay NOT Present");
-
+*/
+/*
   if (checkForI2CAddress(0x20))
   {
     Serial.println("GPIO Extender Present - 0x20");
@@ -803,7 +812,8 @@ void setup()
   }
   else
     Serial.println("GPIO Extender NOT Present");
-
+*/
+/*
   if (checkForI2CAddress(0x3E))
   {
     Serial.println("LCD Present - 0x3E");
@@ -811,7 +821,9 @@ void setup()
   }
   else
     Serial.println("LCD NOT Present");
+*/
 
+/*
   if (checkForI2CAddress(0x49))
   {
     Serial.println("ADC Present - 0x49");
@@ -819,7 +831,8 @@ void setup()
   }
   else
     Serial.println("ADC NOT Present");
-
+*/
+/*
   if (checkForI2CAddress(0x68))
   {
     Serial.println("AMG8833 Present - 0x68");
@@ -827,7 +840,8 @@ void setup()
   }
   else
     Serial.println("AMG8833 NOT Present");
-
+*/
+/*
   if (checkForOneWire())
   {
     Serial.println("TempHum Present - OneWire");
@@ -835,7 +849,8 @@ void setup()
   }
   else
     Serial.println("TempHum NOT Present");
-
+*/
+/*
   if (checkForLevelSensor())
   {
     Serial.println("Water Level Sensor Present - ADC3");
@@ -844,20 +859,22 @@ void setup()
   }
   else
     Serial.println("Water Level Sensor NOT Present");
+*/
+/*
   // start up lcd
   if (LCD_Present)
   {
     startlcd();
   }
-
-
+*/
+/*
   // Start the DS18B20 sensor
   if (OneWire_Present)
   {
     DS18B20sensor.begin();
   }
-
-
+*/
+/*
   // start the Infrared camera if present
   if (AMG8833_Present)
   {
@@ -869,14 +886,15 @@ void setup()
     else
       Serial.println("AMG8833 Present");
   }
-
+*/
   // this resets all the neopixels to an off state
+/*
   strip.Begin();
   strip.Show();
   strip.SetPixelColor(0, black);
 
   strip.Show();
-
+*/
 
   if (digitalRead(15) == 0)
   {
@@ -905,43 +923,46 @@ void setup()
   }
 
 
-
+/*
   xSemaphoreHydroponicsLevelReadSensor = xSemaphoreCreateBinary();
   xSemaphoreGive( xSemaphoreHydroponicsLevelReadSensor);   // initialize
   xSemaphoreTake( xSemaphoreHydroponicsLevelReadSensor, 10);   // start with this off
-
+*/
 
   xSemaphoreSensorsBeingRead = xSemaphoreCreateBinary();
   xSemaphoreGive( xSemaphoreSensorsBeingRead);   // initialize it on
-
+/*
   xSemaphoreEvaluateValves = xSemaphoreCreateBinary();
   xSemaphoreGive( xSemaphoreEvaluateValves);   // initialize it on
-
+*/
+/*
   xSemaphoreEvaluatingValves = xSemaphoreCreateBinary();
   xSemaphoreGive( xSemaphoreEvaluatingValves);   // initialize
   xSemaphoreTake( xSemaphoreEvaluatingValves, 10);   // start with this off
-
+*/
+/*
   xSemaphorePixelPulse = xSemaphoreCreateBinary();
   xSemaphoreGive( xSemaphorePixelPulse);   // initialize
   xSemaphoreTake( xSemaphorePixelPulse, 10);   // start with this off
-
-
+*/
+/*
   xSemaphoreOLEDLoopUpdate = xSemaphoreCreateBinary();
   xSemaphoreGive( xSemaphoreOLEDLoopUpdate);   // initialize it on
   xSemaphoreTake( xSemaphoreOLEDLoopUpdate, 10);   // start with this off
-
+*/
 
   xSemaphoreReadBluetooth = xSemaphoreCreateBinary();
   xSemaphoreGive( xSemaphoreReadBluetooth);   // initialize it on
   xSemaphoreTake( xSemaphoreReadBluetooth, 10);   // start with this off
-
+/*
   xSemaphoreUseI2C = xSemaphoreCreateBinary();
   xSemaphoreGive( xSemaphoreUseI2C);   // initialize
-
+*/
+/*
   xSemaphoreReadInfrared = xSemaphoreCreateBinary();
   xSemaphoreGive( xSemaphoreReadInfrared);   // initialize it on
   xSemaphoreTake( xSemaphoreReadInfrared, 10);   // start with this off
-
+*/
 
 
 
@@ -949,15 +970,16 @@ void setup()
   xSemaphoreGive( xSemaphoreKeepMQTTAlive);   // initialize it on
   //xSemaphoreTake( xSemaphoreKeepMQTTAlive, 10);   // start with this off
 
+/*
   Serial.print("StartxSemaphoreUseI2C=");
   Serial.println(uxSemaphoreGetCount( xSemaphoreUseI2C ));
 
   printSemaphoreStatus("After Semaphore Initialization");
 
   // set all valves I/Os to off
-
+/*
   initializeValvesAndSensors();
-
+*/
 
 
   //---------------------
@@ -1050,7 +1072,9 @@ void setup()
   if (WiFiPresent != true)
   {
 #define APTIMEOUTSECONDS 300
+/*
     updateDisplay(DISPLAY_TRYING_AP);
+*/
     WiFiPresent = localAPGetIP(APTIMEOUTSECONDS);
   }
 
@@ -1111,12 +1135,13 @@ void setup()
     //blinkIPAddress();
     MQTTreconnect(false);// should be true?
 
-
+/*
     updateDisplay(DISPLAY_IPDISPLAY);
+*/
   }
-
+/*
   blinkPixel(0, 3, blue, 150);
-
+*/
   // send debug boot up MQTT message
 
 
@@ -1212,21 +1237,36 @@ void setup()
 
 
   // Function to be exposed
+/*
   rest.function("led", ledControl);
+*/
+/*
   rest.function("setValves", setValves);
+*/
   rest.function("checkForID", checkForID);
+/*
   rest.function("getValveState", getValveState);
+*/
+/*
   rest.function("setSingleValve", setSingleValve);
-
+*/
+/*
   rest.function("testHydroponicsSensors", testHydroponicsSensorsCommand);
+*/
+/*
   rest.function("readHydroponicsSensors", readHydroponicsSensorsCommand);
+*/
+/*
   rest.function("blinkPixelCommand", blinkPixelCommand);
+*/
   rest.function("setStationName", setStationName);
   rest.function("setClockOffset", setClockOffset);
   rest.function("setSensorCycle", setSensorCycle);
   rest.function("restartMQTT", restartMQTT);
   rest.function("assignBluetoothSensors", assignBluetoothSensors);
+/*
   rest.function("enableHydroponicsMode", enableHydroponicsMode);
+*/
     rest.function("rebootExtender", rebootExtender);
 
   rest.function("updateSGS", updateSGS);
@@ -1245,12 +1285,12 @@ void setup()
   print_reset_reason(rtc_get_reset_reason(1));
 
 
-
+/*
   if (LCD_Present) {
 
     updateDisplay(DISPLAY_POWERUP);
   }
-
+*/
 
   // Serial.print("Pre Initial State SetupxSemaphoreUseI2C=");
   //Serial.println(uxSemaphoreGetCount( xSemaphoreUseI2C ));
@@ -1266,11 +1306,13 @@ void setup()
     }
     xSemaphoreGive( xSemaphoreSensorsBeingRead);
   */
+  /*
   if (AMG8833_Present == true)
   {
     xSemaphoreGive( xSemaphoreReadInfrared);   // start the reads
 
   }
+  */
 
 
   //xTaskCreatePinnedToCore(
@@ -1319,17 +1361,19 @@ void setup()
   {
     vTaskDelay(2000 / portTICK_PERIOD_MS);
     Serial.println("Waiting for MQTT IP");
+/*
     updateDisplay(DISPLAY_WAITMQTTIP);
+*/
   }
 
-  xTaskCreatePinnedToCore(
-    taskMainLCDLoopDisplay,          /* Task function. */
-    "taskMainLCDLoopDisplay",        /* String with name of task. */
-    7000,            /* Stack size in words. */
-    NULL,             /* Parameter passed as input of the task */
-    2,                /* Priority of the task. */
-    NULL,             /* Task handle. */
-    1);               // Specific Core
+  //xTaskCreatePinnedToCore(
+    //taskMainLCDLoopDisplay,          /* Task function. */
+    //"taskMainLCDLoopDisplay",        /* String with name of task. */
+    //7000,            /* Stack size in words. */
+    //NULL,             /* Parameter passed as input of the task */
+    //2,                /* Priority of the task. */
+    //NULL,             /* Task handle. */
+    //1);               // Specific Core
 
 
   //xTaskCreatePinnedToCore(
@@ -1343,14 +1387,14 @@ void setup()
   //Serial.print("Pre taskSetValues SetupxSemaphoreUseI2C=");
   //Serial.println(uxSemaphoreGetCount( xSemaphoreUseI2C ));
 
-  xTaskCreatePinnedToCore(
-    taskPixelCommand,          /* Task function. */
-    "TaskPixelCommand",        /* String with name of task. */
-    7000,            /* Stack size in words. */
-    NULL,             /* Parameter passed as input of the task */
-    3,                /* Priority of the task. */
-    NULL,             /* Task handle. */
-    1);               // Specific Core
+  //xTaskCreatePinnedToCore(
+    //taskPixelCommand,          /* Task function. */
+    //"TaskPixelCommand",        /* String with name of task. */
+    //7000,            /* Stack size in words. */
+    //NULL,             /* Parameter passed as input of the task */
+    //3,                /* Priority of the task. */
+    //NULL,             /* Task handle. */
+    //1);               // Specific Core
 
 
   // xTaskCreatePinnedToCore(
@@ -1392,10 +1436,12 @@ void setup()
   // Start OLED Loop
 
   vTaskDelay(2000 / portTICK_PERIOD_MS);
+
   //Serial.print("BUpdateSemaphoreUseI2C=");
   //Serial.println(uxSemaphoreGetCount( xSemaphoreUseI2C ));
+/*
   xSemaphoreGive( xSemaphoreOLEDLoopUpdate);   // initialize it on
-
+*/
 
   bluetoothDeviceCount = countBluetoothSensors();
 
@@ -1484,7 +1530,7 @@ void loop() {
     Serial.println("bluetoothPeriod");
     readBluetooth();
   }
-
+/*
   if ((unsigned long)(millis() - time_now_2) > hydroponicsSensorPeriod) {
     time_now_2 = millis();
     Serial.println("hydroponicsSensorPeriod");
@@ -1503,7 +1549,7 @@ void loop() {
     //Serial.println("valveCheckPeriod");
     DoEvaluateValves();
   }
-
+*/
 
 
 

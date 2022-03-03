@@ -457,8 +457,9 @@ class aREST {
     void send_http_headers() {
 
       addToBufferF(F("HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\nAccess-Control-Allow-Methods: POST, GET, PUT, OPTIONS\r\nContent-Type: application/json\r\nConnection: close\r\n\r\n"));
+      /*
       blinkWhitePixel(0, 1, 150);
-
+      */
     }
 
     // Reset variables after a request

@@ -87,7 +87,7 @@ int restartMQTT(String command) {
 }
 
 
-
+/*
 int blinkPixelCommand(String command) {
 
 
@@ -113,7 +113,7 @@ int blinkPixelCommand(String command) {
 
 
 }
-
+*/
 
 
 int rebootExtender(String command) {
@@ -155,7 +155,7 @@ int checkSystem(String command) {
 
 }
 
-
+/*
 int getValveState(String command) {
 
 
@@ -177,6 +177,7 @@ int getValveState(String command) {
   }
   return 0;
 }
+*/
 
 // Bluetooth commands
 
@@ -257,7 +258,7 @@ int assignBluetoothSensors(String command) {
 }
 
 // Hydroponics Mode
-
+/*
 int enableHydroponicsMode(String command) {
 
   // admin password, enableHydroponics, enableHydroponicsLevel
@@ -294,9 +295,9 @@ int enableHydroponicsMode(String command) {
   return 1;
 
 }
-
+*/
 // Water Commands
-
+/*
 int testHydroponicsSensorsCommand(String command)
 {
   // admin password, returns 4 ADC sensors
@@ -328,7 +329,8 @@ int testHydroponicsSensorsCommand(String command)
   return 1;
 
 }
-
+*/
+/*
 int readHydroponicsSensorsCommand(String command) {
   // admin password, returns 4 ADC sensors
 
@@ -360,9 +362,9 @@ int readHydroponicsSensorsCommand(String command) {
   }
   return 1;
 }
+*/
 
-
-
+/*
 int  setSingleValve(String command) {
 
   // command format:     adminpassword, valvenumber, valvelength
@@ -425,8 +427,8 @@ int  setSingleValve(String command) {
 
   return 1;
 }
-
-
+*/
+/*
 int setValves(String command) {
 
   // valves format:   17 items: adminpassword, valve0state, valve0length, valve1state, valve1state, .......
@@ -471,11 +473,11 @@ int setValves(String command) {
   }
   return 1;
 }
-
+*/
 
 
 //General Commands
-
+/*
 int ledControl(String command) {
 
   // Get state from command
@@ -488,6 +490,7 @@ int ledControl(String command) {
   digitalWrite(6, state);
   return 1;
 }
+*/
 
 int setAdminPassword(String command)
 {
@@ -664,7 +667,9 @@ int updateSGS(String command)
 
   if (command == adminPassword)
   {
+/*
     updateDisplay(DISPLAY_UPDATING);
+*/
     vTaskDelay(5000 / portTICK_PERIOD_MS);
     String fwVersionURL;
     fwVersionURL = "http://www.switchdoc.com/binSGS/SGSWExtCurrentFirmware1.html";
@@ -711,7 +716,9 @@ int updateSGS(String command)
       case HTTP_UPDATE_FAILED:
         Serial.println("[update] Update failed.");
         RESTreturnString = "[update] Update failed.";
+/*
         updateDisplay(DISPLAY_NO_UPDATE_FAILED);
+*/
         vTaskDelay(5000 / portTICK_PERIOD_MS);
         xSemaphoreGive( xSemaphoreRESTCommand);
         xSemaphoreGive( xSemaphorePixelPulse); //Restart the flashing
@@ -724,8 +731,9 @@ int updateSGS(String command)
 
         Serial.println("[update] Update no Updates.");
         RESTreturnString = "[update] Update no Updates.";
+/*
         updateDisplay(DISPLAY_NO_UPDATE_AVAILABLE);
-
+*/
         vTaskDelay(5000 / portTICK_PERIOD_MS);
         xSemaphoreGive( xSemaphoreRESTCommand);
         xSemaphoreGive( xSemaphorePixelPulse); //Restart the flashing
@@ -734,7 +742,9 @@ int updateSGS(String command)
       case HTTP_UPDATE_OK:
 
         Serial.println("[update] Update ok."); // may not called we reboot the ESP
+/*
         updateDisplay(DISPLAY_UPDATE_FINISHED);
+*/
         xSemaphoreGive( xSemaphoreRESTCommand);
         xSemaphoreGive( xSemaphorePixelPulse); //Restart the flashing
         return 3;

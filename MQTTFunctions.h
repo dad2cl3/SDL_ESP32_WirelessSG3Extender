@@ -153,7 +153,7 @@ int sendMQTT(int messageType, String argument)
 
   switch (messageType)
   {
-
+/*
     case MQTTVALVECHANGE:
 
       {
@@ -180,6 +180,7 @@ int sendMQTT(int messageType, String argument)
 
         break;
       }
+*/
     case MQTTTESTMESSAGE:
       {
 
@@ -235,7 +236,7 @@ int sendMQTT(int messageType, String argument)
 
       }
 
-
+/*
     case MQTTHYDROPONICS:
       {
 
@@ -279,7 +280,8 @@ int sendMQTT(int messageType, String argument)
 
 
       }
-
+*/
+/*
     case MQTTHYDROPONICSLEVEL:
       {
 
@@ -298,7 +300,8 @@ int sendMQTT(int messageType, String argument)
 
 
       }
-
+*/
+/*
     case MQTTINFRARED:
       {
 
@@ -320,7 +323,7 @@ int sendMQTT(int messageType, String argument)
 
 
       }
-
+*/
 
 
 

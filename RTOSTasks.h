@@ -1,17 +1,19 @@
 // RTOS Tasks for various modes and periphials
-
+/*
 #include "evaluateValves.h"
-
+*/
 #include "Flora.h"
 
 
-
+/*
 void blinkBluePixel(int pixel, int count, int time);
+*/
+
 int sendMQTTBlueTooth(String MacAddress, int temperature, int moisture, int brightness, int conductivity,  int battery,  int readCount);
 
 
 
-
+/*
 void taskFetchInfrared( void * parameter)
 {
   // Enter RTOS Task Loop
@@ -33,8 +35,8 @@ void taskFetchInfrared( void * parameter)
   }
 
 }
-
-
+*/
+/*
 void taskReadSendHydroponics( void * parameter)
 {
   // Enter RTOS Task Loop
@@ -59,7 +61,8 @@ void taskReadSendHydroponics( void * parameter)
   }
 
 }
-
+*/
+/*
 void taskReadSendHydroponicsLevel( void * parameter)
 {
   // Enter RTOS Task Loop
@@ -80,9 +83,9 @@ void taskReadSendHydroponicsLevel( void * parameter)
   }
 
 }
+*/
 
-
-
+/*
 void taskSetValves( void * parameter)
 {
   // Enter RTOS Task Loop
@@ -103,7 +106,7 @@ void taskSetValves( void * parameter)
   }
 
 }
-
+*/
 
 
 
@@ -177,7 +180,7 @@ void taskRESTCommand( void * parameter)
 // Pixel Task and routines
 
 
-
+/*
 void taskPixelCommand( void * parameter)
 {
   int i = 0;
@@ -219,10 +222,10 @@ void taskPixelCommand( void * parameter)
   }
 
 }
+*/
 
 
-
-
+/*
 void taskMainLCDLoopDisplay(void * parameter)
 {
 
@@ -280,7 +283,7 @@ void taskMainLCDLoopDisplay(void * parameter)
     vTaskDelay(2000 / portTICK_PERIOD_MS);
   }
 }
-
+*/
 
 
 
