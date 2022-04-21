@@ -15,6 +15,9 @@ void readBluetooth()
 
 
       bluetoothDeviceCount = countBluetoothSensors();
+      Serial.print("BT count = ");
+      Serial.println(bluetoothDeviceCount);
+      
       // process devices
       for (int i = 0; i < bluetoothDeviceCount; i++) {
         Serial.print(">>>>>>>>>>>>>>>>>>>>>>>>>>> Processing Bluetooth: ");
@@ -32,6 +35,9 @@ void readBluetooth()
 
             Serial.print("ReadCount==");
             Serial.println(readCount);
+            Serial.print("Latest flora data = ");
+            Serial.println(latestFloraData.validData);
+            
             if (latestFloraData.validData)
             {
               // Good data, send it.
@@ -50,7 +56,7 @@ void readBluetooth()
         }
         vTaskDelay(1500 / portTICK_PERIOD_MS);
       }
-    #ifdef HEAPDEBUG
+   #ifdef HEAPDEBUG
       Serial.print(">>>>>>>>>>>>>>>>>>>>>>>>>>> 0.4  main loop ");
       Serial.println(ESP.getFreeHeap());
     #endif

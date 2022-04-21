@@ -21,7 +21,7 @@ void WiFiEvent(WiFiEvent_t event, system_event_info_t info);
 int WPSReconnectCount = 0;   // for timeout on WPS
 
 // SmartConfig
-
+/*
 bool SmartConfigGetIP(long waitForStartSeconds, long secondsToWaitAfterStart)
 {
 
@@ -104,7 +104,7 @@ bool SmartConfigGetIP(long waitForStartSeconds, long secondsToWaitAfterStart)
 
   return myWiFiPresent;
 }
-
+*/
 
 //
 // WPS Button GET IP

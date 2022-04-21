@@ -251,6 +251,7 @@ bool readFloraBatteryCharacteristic(BLERemoteService * floraService, String base
   Serial.print("-- Battery: ");
   Serial.println(battery);
 #endif
+  Serial.println("Returning...");
   return true;
 }
 
@@ -294,14 +295,14 @@ bool processFloraDevice(BLEAddress floraAddress, char* deviceMacAddress, bool ge
 
   // process devices data
   bool success = processFloraService(floraService, deviceMacAddress, getBattery);
-
+  Serial.print("Flora service = ");
+  Serial.println(success);
+  
   if (success == true)
-  {
-
+  { 
     int i;
     for (i = 0; i < MAXBLUETOOTHDEVICES; i++)
-    {
-
+    { 
       if (strcasecmp(BluetoothAddresses[i].c_str(), floraAddress.toString().c_str()) == 0)
       {
 
@@ -319,7 +320,7 @@ bool processFloraDevice(BLEAddress floraAddress, char* deviceMacAddress, bool ge
 
 
         LastMoistureBluetoothRead[i] = latestFloraData.moisture;
-        i = 8;
+        i = MAXBLUETOOTHDEVICES;
 
       }
     }

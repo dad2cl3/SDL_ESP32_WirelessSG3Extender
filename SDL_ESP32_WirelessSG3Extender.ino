@@ -38,9 +38,7 @@ long firstHeap, lastHeap;   // memory problem debug
 
 int bluetoothDeviceCount;
 
-//#include "BLEDevice.h"
-
-
+// #include "BLEDevice.h"
 
 #include "MQTTMessages.h"
 
@@ -233,6 +231,8 @@ Preferences preferences;
 /*
 #include "ValveOutputs.h"
 */
+
+
 #include <esp_wps.h>
 #include <esp_smartconfig.h>
 
@@ -313,6 +313,7 @@ void configModeCallback (WiFiManager *myWiFiManager)
   Serial.println(WiFi.softAPIP());
 
 }
+
 
 #include "aPubSubClient.h"
 WiFiClient espClient;
@@ -511,6 +512,7 @@ void MQTTreconnect(bool reboot) {
 
 
 // OTA updated
+
 #include <WiFiMulti.h>
 
 
@@ -519,8 +521,8 @@ void MQTTreconnect(bool reboot) {
 #include <HTTPUpdate.h>
 
 
-
 // include GET IP routines
+
 #include "SDL_ESP32_BC24_GETIP.h"
 
 
@@ -536,7 +538,7 @@ void MQTTreconnect(bool reboot) {
 
 
 
-
+/*
 
 #undef DEBUGBLYNK
 
@@ -545,7 +547,7 @@ void MQTTreconnect(bool reboot) {
 #define BLYNK_PRINT Serial // Defines the object that is used for printing
 #undef BLYNK_DEBUG
 #define BLYNK_USE_128_VPINS
-
+*/
 //#include <BlynkSimpleEsp32.h>
 
 
@@ -895,7 +897,7 @@ void setup()
 
   strip.Show();
 */
-
+/*
   if (digitalRead(15) == 0)
   {
     resetPreferences();
@@ -904,7 +906,7 @@ void setup()
   }
   Serial.print("aux switch=");
   Serial.println(digitalRead(15));
-
+*/
 
   // RTOS
 
@@ -1259,19 +1261,22 @@ void setup()
 /*
   rest.function("blinkPixelCommand", blinkPixelCommand);
 */
+
   rest.function("setStationName", setStationName);
   rest.function("setClockOffset", setClockOffset);
   rest.function("setSensorCycle", setSensorCycle);
   rest.function("restartMQTT", restartMQTT);
   rest.function("assignBluetoothSensors", assignBluetoothSensors);
+
 /*
   rest.function("enableHydroponicsMode", enableHydroponicsMode);
 */
-    rest.function("rebootExtender", rebootExtender);
+  rest.function("rebootExtender", rebootExtender);
 
   rest.function("updateSGS", updateSGS);
 
   // Give name & ID to the device (ID should be 6 characters long)
+
   rest.set_id(myID);
   rest.set_name("SG3WEXTV1");
 
@@ -1354,9 +1359,6 @@ void setup()
 
 
   // Now we have to wait until we have a MQTT Number
-
-
-
   while (MQTT_IP == "")
   {
     vTaskDelay(2000 / portTICK_PERIOD_MS);
@@ -1504,7 +1506,7 @@ void setup()
 
 
 void loop() {
-
+  
   MQTTclient.loop();
   /*
     Serial.printf("millis - time_now_1=%d\n", (unsigned long) (millis() - time_now_1));
